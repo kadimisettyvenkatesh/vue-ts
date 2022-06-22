@@ -1,10 +1,10 @@
 <template>
   <div class="hello" @click="changeName()">
-    {{ counterStore.count }}
-    {{errors}}
-    <h3>SIGN IN</h3>
+    <!-- {{ counterStore.count }} -->
+    {{errors ? errors : null}}
   </div>
   <div class="container">
+    <h3>SIGN IN</h3>
     <div class="row">
       <div class="col">
         <form @submit.prevent="signInSubmit()" novalidate>
@@ -31,7 +31,8 @@
 import { ref } from 'vue';
 import { useForm } from "vee-validate";
 import * as Yup from "yup";
-import { useCounterStore } from '../store/counter-store';
+import { useCounterStore } from '@/store/counter-store';
+import { useUserStore } from '@/store/user-store';
 const name = ref('Sign In');
 const counterStore = useCounterStore();
 const changeName = () => {
@@ -40,18 +41,30 @@ const changeName = () => {
 };
 const valSchema = Yup.object().shape({
   email: Yup.string().email().required(),
-  password: Yup.string().min(6).required().max(10),
+  password: Yup.string().min(3).required().max(10),
 });
 
 const {values:signForm,handleSubmit,errors} = useForm({
   initialValues:{
-    email:'',
-    password:''
+    email:'venky@applines.com',
+    password:'123'
   },
   validationSchema:valSchema
 });
+const userStore= useUserStore();
 const signInSubmit = handleSubmit((values)=>{
-  console.log(values);
+  userStore.$onAction(({
+    name, // name of the action
+    after, // hook after the action returns or resolves
+  })=>{
+    if(name == 'signIn'){
+      after((data)=>{
+        console.log(data);
+      })
+    } 
+    // console.log(action)
+  })
+ userStore.signIn(values);
 });
 
 

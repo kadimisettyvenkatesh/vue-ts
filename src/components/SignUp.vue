@@ -1,14 +1,15 @@
 <template>
   <div class="hello" @click="changeName()">
-    {{ name }}
-    {{ counterStore.count }}
+  <h1>SIGN UP</h1>
+    <!-- <h1>{{ name }}</h1> -->
+    <!-- {{ counterStore.count }} -->
   </div>
   <div class="container">
     <div class="row">
       <div class="col-12">
         <Form @submit="onSubmit" v-slot="{ errors }">
-          <div class="form-row">
-            <div class="form-group col">
+          <div class="form-row row">
+            <div class="form-group col-2">
               <label>Title</label>
               <Field name="title" as="select" class="form-control" :class="{ 'is-invalid': errors.title }">
                 <option value=""></option>
@@ -30,7 +31,7 @@
               <div class="invalid-feedback">{{ errors.lastName }}</div>
             </div>
           </div>
-          <div class="form-row">
+          <div class="form-row row">
             <div class="form-group col">
               <label>Date of Birth</label>
               <Field name="dob" type="date" class="form-control" :class="{ 'is-invalid': errors.dob }" />
@@ -42,7 +43,7 @@
               <div class="invalid-feedback">{{ errors.email }}</div>
             </div>
           </div>
-          <div class="form-row">
+          <div class="form-row row">
             <div class="form-group col">
               <label>Password</label>
               <Field name="password" type="password" class="form-control" :class="{ 'is-invalid': errors.password }" />
@@ -75,10 +76,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { Form, Field, useForm } from "vee-validate";
+import router from '../router'
 import { useCounterStore } from '../store/counter-store';
+import { useUserStore } from '../store/user-store';
 
 const name = ref('SignUp');
 const counterStore = useCounterStore();
+const userStore = useUserStore();
 const changeName = () => {
   name.value = "Test";
   counterStore.increment();
@@ -86,6 +90,19 @@ const changeName = () => {
   counterStore.$patch({ count: counterStore.count++ });
 };
 const onSubmit = (data: any) => {
+  userStore.$onAction(({
+    name, // name of the action
+    after, // hook after the action returns or resolves
+  })=>{
+    if(name == 'signUp'){
+      after((data)=>{
+        console.log(data);
+        router.push('/login')
+      })
+    } 
+    // console.log(action)
+  })
+  userStore.signUp(data);
   console.log(data);
 }
 </script>

@@ -1,5 +1,46 @@
 {
-    "users": [],
-    "profile": { "name": "venkatesh" }
+  "users": [
+    {
+      "title": "Mr",
+      "firstName": "Venkatesh",
+      "lastName": "Kadimisetty",
+      "dob": "2022-06-25",
+      "email": "venky@applines.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "acceptTerms": "true",
+      "id": 1
+    },
+    {
+      "title": "Mr",
+      "firstName": "Venkatesh",
+      "lastName": "Kadimisetty",
+      "dob": "2022-06-30",
+      "email": "venky+1@applines.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "acceptTerms": "true",
+      "id": 2
+    },
+    {
+      "title": "Mr",
+      "firstName": "Venkatesh",
+      "lastName": "Kadimisetty",
+      "dob": "2022-06-25",
+      "email": "venky+1@applines.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "acceptTerms": "true",
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ],
+  "profile": {
+    "name": "venkatesh"
   }
-  
+}
