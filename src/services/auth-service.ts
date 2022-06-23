@@ -1,4 +1,4 @@
-import http from '../plugins/axios-api';
+import http from "@/config/axios-api";
 
 class userService {
     loginUser(payload: any) {

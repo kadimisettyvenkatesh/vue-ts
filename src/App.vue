@@ -1,14 +1,17 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/login">Sign In</router-link> |
     <router-link to="/signup">Sign Up</router-link> | 
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav> -->
   <router-view/>
 </template>
 
 <style lang="scss">
+html,body, #app{
+  height: 100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

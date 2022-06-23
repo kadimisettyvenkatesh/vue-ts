@@ -3,6 +3,6 @@ import App from './App.vue'
 import router from './router'
 
 import 'bootstrap/dist/css/bootstrap.css';
-import pinia from './plugins/pinia-setup';
+import pinia from './config/pinia-setup';
 
-createApp(App).use(router).use(pinia).mount('#app')
+createApp(App).use(pinia).use(router).mount('#app')

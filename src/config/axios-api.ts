@@ -1,7 +1,7 @@
 import { BASE_URL } from "@/app.constants";
 import axios from "axios";
 
-const instance = axios.create({
+const http = axios.create({
     baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json",
@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 
 // Add a request interceptor
-instance.interceptors.request.use((config) => {
+http.interceptors.request.use((config) => {
     // Do something before request is sent
     return config;
 }, (error) => {
@@ -18,7 +18,7 @@ instance.interceptors.request.use((config) => {
 });
 
 // Add a response interceptor
-instance.interceptors.response.use((response) => {
+http.interceptors.response.use((response) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response;
@@ -27,4 +27,4 @@ instance.interceptors.response.use((response) => {
     // Do something with response error
     return Promise.reject(error);
 });
-export default instance;
+export default http;

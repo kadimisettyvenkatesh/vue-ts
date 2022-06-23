@@ -2,10 +2,11 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LogIn from '../components/LogIn.vue';
 import SignUp from '../components/SignUp.vue';
+import { DASHBOARD_ROUTES } from '@/modules/dashboard/dashboard-routes';
 
 
 const routes: Array<RouteRecordRaw> = [
-  { path: '/', redirect: '/login' },
+  { path: '', redirect: '/login' },
   {
     path:'/login',
     name:'login',
@@ -31,6 +32,23 @@ const routes: Array<RouteRecordRaw> = [
         component: HomeView
       }
     ]
+  },
+  {
+    path: '/',
+    name: 'layout',
+    component: () => import( '../views/LayOut.vue'),
+    children:[
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: ()=>import(/* webpackChunkName: "dashboard" */ '../modules/dashboard/DashBoard.vue'),
+        children:DASHBOARD_ROUTES
+      }
+    ],
+    beforeEnter: (to, from) => {
+      // reject the navigation
+      return true;
+    },
   }
 ]
 

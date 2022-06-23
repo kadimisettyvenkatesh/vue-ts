@@ -97,7 +97,7 @@ const onSubmit = (data: any) => {
     if(name == 'signUp'){
       after((data)=>{
         console.log(data);
-        router.push('/login')
+        router.push('/login');
       })
     } 
     // console.log(action)
