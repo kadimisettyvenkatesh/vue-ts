@@ -58,17 +58,16 @@ const { values: signForm, handleSubmit, errors } = useForm({
 });
 const userStore = useUserStore();
 const signInSubmit = handleSubmit(async (values) => {
-  userStore.$onAction(({
-    name, // name of the action
-    after, // hook after the action returns or resolves
-  }) => {
+  const unsubscribeAction = userStore.$onAction(({ name,  after,args,store  }) => {
     if (name == 'signInSuccess') {
       after((data) => {
         router.push('/dashboard');
+        unsubscribeAction();
       })
     } else if(name == 'signInFailure'){
       after((data) => {
         alert(data.message);
+        unsubscribeAction();
       })
     }
   })
