@@ -17,10 +17,20 @@ export const useUserStore = defineStore('user', {
     signIn(payload: any){
       userService.loginUser(payload).then((resp:any) => {
         if (resp) {
-          this.loggedInUser = resp.data[0];
-          console.log('loginData',resp.data);
+          this.signInSuccess(resp.data[0]);
+          return resp.data[0];
         }
+      },(error)=>{
+        this.signInFailure(error);
       })
+    },
+    signInSuccess(userdata:any){
+      this.loggedInUser = userdata;
+      return userdata;
+    },
+    signInFailure(error:any){
+      this.loggedInUser = {};
+      return error;
     },
     signUp(payload: any) {
       userService.signupUser(payload).then((resp:any) => {

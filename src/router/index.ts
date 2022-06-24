@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/',
+    path: '',
     name: 'layout',
     component: () => import( '../views/LayOut.vue'),
     children:[

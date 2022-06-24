@@ -4,30 +4,31 @@
     <!-- {{errors ? errors : null}} -->
   </div>
   <div class="sign-blk">
-     <div class="container sign-cont">
-    <h3>SIGN IN</h3>
-    <div class="row">
-      <div class="col">
-        <form @submit.prevent="signInSubmit()" novalidate>
-          <div class="form-group" :class="{ 'is-invalid': errors.email }">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Enter email" v-model="signForm.email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            <small class="invalid-feedback">{{errors.email}} test</small>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="signForm.password">
-            <small class="invalid-feedback">{{errors.email}}</small>
-          </div>
-          <button type="submit" class="btn btn-primary mt-3">Sign In</button>
-        </form>
+    <div class="container sign-cont">
+      <h3>SIGN IN</h3>
+      <div class="row">
+        <div class="col">
+          <form @submit.prevent="signInSubmit()" novalidate>
+            <div class="form-group" :class="{ 'is-invalid': errors.email }">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter email" v-model="signForm.email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <small class="invalid-feedback">{{ errors.email }} test</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                v-model="signForm.password">
+              <small class="invalid-feedback">{{ errors.email }}</small>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Sign In</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-  </div>
- 
+
 </template>
 
 <script lang="ts" setup>
@@ -48,28 +49,30 @@ const valSchema = Yup.object().shape({
   password: Yup.string().min(3).required().max(10),
 });
 
-const {values:signForm,handleSubmit,errors} = useForm({
-  initialValues:{
-    email:'venky@applines.com',
-    password:'123'
+const { values: signForm, handleSubmit, errors } = useForm({
+  initialValues: {
+    email: 'venky@applines.com',
+    password: '123'
   },
-  validationSchema:valSchema
+  validationSchema: valSchema
 });
-const userStore= useUserStore();
-const signInSubmit = handleSubmit((values)=>{
+const userStore = useUserStore();
+const signInSubmit = handleSubmit(async (values) => {
   userStore.$onAction(({
     name, // name of the action
     after, // hook after the action returns or resolves
-  })=>{
-    if(name == 'signIn'){
-      after((data)=>{
-        console.log(data);
-         router.push('/dashboard');
+  }) => {
+    if (name == 'signInSuccess') {
+      after((data) => {
+        router.push('/dashboard');
       })
-    } 
-    // console.log(action)
+    } else if(name == 'signInFailure'){
+      after((data) => {
+        alert(data.message);
+      })
+    }
   })
- userStore.signIn(values);
+  userStore.signIn(values);
 });
 
 
@@ -80,11 +83,12 @@ const signInSubmit = handleSubmit((values)=>{
   height: 100%;
   // width: 100%;
   align-items: center;
-  .sign-cont{
+
+  .sign-cont {
     width: 500px;
     padding: 3rem;
     border-radius: 1rem;
-    background:aquamarine;
+    background: aquamarine;
   }
 }
 </style>

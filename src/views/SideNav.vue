@@ -7,12 +7,12 @@
         <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
                 <a class="nav-link px-sm-0 px-2">
-                    <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"><router-link to="/dasboard">Home</router-link></span>
+                    <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"><router-link to="/dashboard">Home</router-link></span>
                 </a>
             </li>
             <li>
                 <a data-bs-toggle="collapse" class="nav-link px-sm-0 px-2">
-                    <i class="fs-5 bi-speedometer2"></i><span class="ms-1 d-none d-sm-inline"><router-link to="/dasboard">Dashboard</router-link></span> </a>
+                    <i class="fs-5 bi-speedometer2"></i><span class="ms-1 d-none d-sm-inline"><router-link to="/dashboard">Dashboard</router-link></span> </a>
             </li>
             <li>
                 <a class="nav-link px-sm-0 px-2">
