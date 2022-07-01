@@ -2,6 +2,7 @@
   <div class="hello" @click="changeName()">
     <!-- {{ counterStore.count }} -->
     <!-- {{errors ? errors : null}} -->
+    {{ t('hello') }}
   </div>
   <div class="sign-blk">
     <div class="container sign-cont">
@@ -37,8 +38,10 @@ import { useForm } from "vee-validate";
 import * as Yup from "yup";
 import { useCounterStore } from '@/store/counter-store';
 import { useUserStore } from '@/store/user-store';
+import { useI18n } from 'vue-i18n';
 import router from '../router'
 const name = ref('Sign In');
+const {t}= useI18n();
 const counterStore = useCounterStore();
 const changeName = () => {
   name.value = "Sign In Test";
