@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LogIn from '../components/LogIn.vue';
-import SignUp from '../components/SignUp.vue';
+import HomeView from '@/views/HomeView.vue';
+import LogIn from '@/components/LogIn.vue';
+import SignUp from '@/components/SignUp.vue';
 import { DASHBOARD_ROUTES } from '@/modules/dashboard/dashboard-routes';
 
 
