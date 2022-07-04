@@ -40,13 +40,19 @@ import { useCounterStore } from '@/store/counter-store';
 import { useUserStore } from '@/store/user-store';
 import { useI18n } from 'vue-i18n';
 import router from '../router'
+
+
 const name = ref('Sign In');
 const {t}= useI18n();
+const {locale } = useI18n({ useScope: 'global' })
 const counterStore = useCounterStore();
+
 const changeName = () => {
   name.value = "Sign In Test";
   counterStore.increment();
+  locale. value= 'de';
 };
+
 const valSchema = Yup.object().shape({
   email: Yup.string().email().required(),
   password: Yup.string().min(3).required().max(10),
@@ -59,6 +65,8 @@ const { values: signForm, handleSubmit, errors } = useForm({
   },
   validationSchema: valSchema
 });
+
+
 const userStore = useUserStore();
 const signInSubmit = handleSubmit(async (values) => {
   const unsubscribeAction = userStore.$onAction(({ name,  after,args,store  }) => {
