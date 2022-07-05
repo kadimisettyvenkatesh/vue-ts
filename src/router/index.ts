@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import LogIn from '@/components/LogIn.vue';
 import SignUp from '@/components/SignUp.vue';
 import { DASHBOARD_ROUTES } from '@/modules/dashboard/dashboard-routes';
+import { BasicAuthGuard } from '@/guards/auth-guard';
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -45,10 +46,7 @@ const routes: Array<RouteRecordRaw> = [
         children:DASHBOARD_ROUTES
       }
     ],
-    beforeEnter: (to, from) => {
-      // reject the navigation
-      return true;
-    },
+    beforeEnter: BasicAuthGuard,
   }
 ]
 

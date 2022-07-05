@@ -8,6 +8,9 @@ export const useUserStore = defineStore('user', {
   getters: {
     getUsers(state) {
       return state.users;
+    },
+    getLoggedInUser():any{
+      return this.loggedInUser;
     }
   },
   actions: {
