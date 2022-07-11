@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue';
 import LogIn from '@/components/LogIn.vue';
 import SignUp from '@/components/SignUp.vue';
+import PrimeLogin from '@/components/PrimeLogin.vue';
 import { DASHBOARD_ROUTES } from '@/modules/dashboard/dashboard-routes';
 import { BasicAuthGuard } from '@/guards/auth-guard';
 
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     name:'login',
     alias: '/signin',
     component:LogIn
+  },
+  {
+    path:'/primelogin',
+    name:'primelogin',
+    component:PrimeLogin
   },
   {
     path:'/signup',
